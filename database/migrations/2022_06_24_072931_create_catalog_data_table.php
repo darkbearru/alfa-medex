@@ -10,14 +10,14 @@ return new class extends Migration {
      *
      * @return void
      */
-    public function up()
+    public function up(): void
     {
         Schema::create('catalog_data', function (Blueprint $table) {
             $table->id();
             $table->integer('catalog_id')->index();
-            $table->integer('vendor_code')->index();
+            $table->string('vendor_code', 20)->index();
             $table->string('name');
-            $table->mediumText('description');
+            $table->Text('description');
             $table->jsonb('options')->index();
             $table->jsonb('tags')->index();
             $table->integer('media');

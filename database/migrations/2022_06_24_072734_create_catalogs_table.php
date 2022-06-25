@@ -10,14 +10,14 @@ return new class extends Migration {
      *
      * @return void
      */
-    public function up()
+    public function up(): void
     {
         Schema::create('catalogs', function (Blueprint $table) {
             $table->id();
             $table->integer('parent_id')->default(0)->index();
-            $table->string('token', 20)->index();
+            $table->string('token', 50)->index();
             $table->string('name');
-            $table->mediumText('description');
+            $table->longText('description');
             $table->timestamps();
         });
     }
@@ -27,7 +27,7 @@ return new class extends Migration {
      *
      * @return void
      */
-    public function down()
+    public function down(): void
     {
         Schema::dropIfExists('catalogs');
     }
