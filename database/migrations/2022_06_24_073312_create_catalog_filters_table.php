@@ -14,7 +14,7 @@ return new class extends Migration {
     {
         Schema::create('catalog_filters', function (Blueprint $table) {
             $table->id();
-            $table->integer('catalog_id')->index();
+            $table->foreignId('catalog_id')->constrained()->cascadeOnDelete();
             $table->jsonb('options');
             $table->timestamps();
         });

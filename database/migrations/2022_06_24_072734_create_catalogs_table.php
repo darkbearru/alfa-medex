@@ -14,7 +14,7 @@ return new class extends Migration {
     {
         Schema::create('catalogs', function (Blueprint $table) {
             $table->id();
-            $table->integer('parent_id')->default(0)->index();
+            $table->foreignId('parent_id')->default(0)->constrained('catalogs')->cascadeOnDelete();
             $table->string('token', 50)->index();
             $table->string('name');
             $table->longText('description');
