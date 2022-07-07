@@ -15,12 +15,25 @@ mix
         stats: {
             children: true,
         },
+        module: {
+            rules: [
+                {
+                    test: /\.(postcss)$/,
+                    use: [
+                        'vue-style-loader',
+                        {loader: 'css-loader', options: {importLoaders: 1}},
+                        'postcss-loader'
+                    ]
+                }
+            ]
+        }
     })
     .js('resources/js/app.js', 'public/js')
+    .sourceMaps(!mix.inProduction())
     .vue()
     .postCss('resources/css/app.css', 'public/css', [
-        require('tailwindcss'),
-        require('autoprefixer')
+            require('tailwindcss'),
+            //require('autoprefixer')
         ]
     )
     .alias({
