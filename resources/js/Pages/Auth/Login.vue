@@ -1,11 +1,11 @@
 <script setup>
-import BreezeButton from '@/Components/Button.vue';
-import BreezeCheckbox from '@/Components/Checkbox.vue';
+import DarkButton from '@/Components/Darkbear/Button.vue';
+import DarkCheckbox from '@/Components/Darkbear/Checkbox.vue';
 import BreezeGuestLayout from '@/Layouts/Guest.vue';
-import BreezeInput from '@/Components/Input.vue';
-import BreezeLabel from '@/Components/Label.vue';
 import BreezeValidationErrors from '@/Components/ValidationErrors.vue';
 import {Head, Link, useForm} from '@inertiajs/inertia-vue3';
+import FloatLabel from "@/Components/Darkbear/FloatLabel";
+import FloatInput from "@/Components/Darkbear/FloatInput";
 
 defineProps({
     canResetPassword: Boolean,
@@ -23,11 +23,21 @@ const submit = () => {
         onFinish: () => form.reset('password'),
     });
 };
+
+</script>
+<script>
+export default {
+    layout: ""
+};
 </script>
 
 <template>
     <BreezeGuestLayout>
-        <Head title="Log in"/>
+        <Head title="Авторизация"/>
+
+        <h1 class="text-xl font-bold leading-tight tracking-tight text-gray-900 md:text-2xl dark:text-white">
+            Авторизация
+        </h1>
 
         <BreezeValidationErrors class="mb-4"/>
 
@@ -35,36 +45,43 @@ const submit = () => {
             {{ status }}
         </div>
 
-        <form @submit.prevent="submit">
-            <div>
-                <BreezeLabel for="email" value="Email"/>
-                <BreezeInput id="email" v-model="form.email" autocomplete="username" autofocus class="mt-1 block w-full"
-                             required type="email"/>
+        <form class="space-y-4 md:space-y-6" @submit.prevent="submit">
+
+            <div class="relative">
+                <FloatInput id="email" v-model="form.email" autocomplete="username" autofocus
+                            required type="email"/>
+                <FloatLabel for="email">Email</FloatLabel>
             </div>
 
-            <div class="mt-4">
-                <BreezeLabel for="password" value="Password"/>
-                <BreezeInput id="password" v-model="form.password" autocomplete="current-password"
-                             class="mt-1 block w-full" required type="password"/>
+            <div class="relative">
+                <FloatInput id="password" v-model="form.password" autocomplete="current-password"
+                            required type="password"/>
+                <FloatLabel for="password">Пароль</FloatLabel>
             </div>
 
             <div class="block mt-4">
                 <label class="flex items-center">
-                    <BreezeCheckbox v-model:checked="form.remember" name="remember"/>
                     <span class="ml-2 text-sm text-gray-600">Remember me</span>
                 </label>
             </div>
 
-            <div class="flex items-center justify-end mt-4">
+            <div class="flex items-center justify-between">
+                <div class="flex items-start">
+                    <div class="flex items-center h-5">
+                        <DarkCheckbox v-model:checked="form.remember" name="remember" required/>
+                    </div>
+                    <div class="ml-3 text-sm">
+                        <label class="text-gray-500 dark:text-gray-300" for="remember">Запомнить меня</label>
+                    </div>
+                </div>
                 <Link v-if="canResetPassword" :href="route('password.request')"
-                      class="underline text-sm text-gray-600 hover:text-gray-900">
-                    Forgot your password?
+                      class="text-sm font-medium text-primary-600 hover:underline dark:text-primary-500">
+                    Забыли пароль?
                 </Link>
-
-                <BreezeButton :class="{ 'opacity-25': form.processing }" :disabled="form.processing" class="ml-4">
-                    Log in
-                </BreezeButton>
             </div>
+            <DarkButton :class="{ 'opacity-25': form.processing }" :disabled="form.processing" type="submit">Войти
+            </DarkButton>
+
         </form>
     </BreezeGuestLayout>
 </template>

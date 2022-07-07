@@ -1,6 +1,6 @@
 <template>
-    <svg enable-background="new 0 -24 290 100" height="100px" version="1.1"
-         viewBox="0 -24 290 100"
+    <svg height="100px" version="1.1"
+         viewBox="0 0 290 50"
          width="290px" x="0px" xml:space="preserve" xmlns="http://www.w3.org/2000/svg"
          y="0px">
 <g>
