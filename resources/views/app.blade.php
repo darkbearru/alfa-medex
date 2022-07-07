@@ -2,6 +2,7 @@
 <html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
     <head>
         <meta charset="utf-8">
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
 
         <title inertia>{{ config('app.name', 'Laravel') }}</title>
@@ -21,7 +22,7 @@
         @inertia
 
         @env ('local')
-            <script src="http://localhost:8080/js/bundle.js"></script>
+            <!--script src="http://localhost:8000/js/bundle.js"></script-->
         @endenv
     </body>
 </html>
