@@ -11,7 +11,7 @@ class AppServiceProvider extends ServiceProvider
      *
      * @return void
      */
-    public function register()
+    public function register(): void
     {
         //
     }
@@ -21,8 +21,10 @@ class AppServiceProvider extends ServiceProvider
      *
      * @return void
      */
-    public function boot()
+    public function boot(): void
     {
-        //
+//        Gate::define('admin', function(User $user) {
+//            return $user?->policy & $USER_RIGHT__ADMINISTRATOR;
+//        });
     }
 }
