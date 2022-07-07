@@ -12,6 +12,9 @@ class User extends Authenticatable
 {
     use HasApiTokens, HasFactory, Notifiable;
 
+    public static int $USER_RIGHT__ADMINISTRATOR = 16;
+    public static int $USER_RIGHT__SUPER_ADMIN = 32;
+
     /**
      * The attributes that are mass assignable.
      *
