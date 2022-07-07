@@ -14,7 +14,7 @@ return new class extends Migration {
     {
         Schema::create('catalog_data', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('catalog_id')->constrained()->cascadeOnDelete();
+            $table->foreignId('catalog_id')->constrained('catalogs')->cascadeOnDelete();
             $table->string('vendor_code', 20)->index();
             $table->string('name');
             $table->Text('description');
