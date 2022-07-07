@@ -5,7 +5,9 @@ namespace Database\Seeders;
 use App\Models\Catalog;
 use App\Models\CatalogData;
 use App\Models\CatalogFilter;
+use App\Models\User;
 use Illuminate\Database\Seeder;
+use Illuminate\Support\Facades\Hash;
 use JetBrains\PhpStorm\NoReturn;
 
 class DatabaseSeeder extends Seeder
@@ -17,17 +19,31 @@ class DatabaseSeeder extends Seeder
      */
     #[NoReturn] public function run(): void
     {
-        $recs = Catalog::factory(2)->create(['parent_id' => 0])->toArray();
-        // Генерим детей и получаем список ID последеней ветви к которой привязываем товары
-        $children = $this->createCatalogChildren($recs, 0, 2);
+        $recs = Catalog::factory(5)->create(['parent_id' => 0])->toArray();
+        // Генерим детей и получаем список ID последней ветви к которой привязываем товары
+        $this->createCatalogChildren($recs, 0, 2);
 
 
         // \App\Models\User::factory(10)->create();
 
-        // \App\Models\User::factory()->create([
-        //     'name' => 'Test User',
-        //     'email' => 'test@example.com',
-        // ]);
+        User::factory()->create([
+            'name' => 'Алексей Абраменко',
+            'email' => 'a.abramenko@chita.ru',
+            'password' => Hash::make('12345'),
+            'policy' => User::$USER_RIGHT__SUPER_ADMIN
+        ]);
+
+        User::factory()->create([
+            'name' => 'Черкасов Антон',
+            'email' => 'bitmap@bitmap.ru',
+            'password' => Hash::make('12345'),
+            'policy' => User::$USER_RIGHT__ADMINISTRATOR
+        ]);
+        User::factory()->create([
+            'name' => 'John Doe',
+            'email' => 'john@doe.com',
+            'password' => Hash::make('12345')
+        ]);
     }
 
 
@@ -38,7 +54,7 @@ class DatabaseSeeder extends Seeder
      * @param array $recs
      * @param int $level
      * @param int $maxLevel
-     * @return array
+     * @return void
      */
     private function createCatalogChildren(array $recs, int $level = 0, int $maxLevel = 2): void
     {
