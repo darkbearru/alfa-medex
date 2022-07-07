@@ -2,8 +2,19 @@
 
 namespace App\Helpers;
 
+use Illuminate\Foundation\Application;
+
 class VersionHelper
 {
+    public static function List(): array
+    {
+        return [
+            'laravelVersion' => Application::VERSION,
+            'phpVersion' => PHP_VERSION,
+            'appVersion' => self::Current()
+        ];
+    }
+
     public static function Current($default = '0.0.1'): string
     {
         try {
