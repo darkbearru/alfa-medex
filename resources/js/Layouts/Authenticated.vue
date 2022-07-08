@@ -24,11 +24,10 @@ onMounted(() => {
 
         <!-- Заголовок и навигация -->
         <header class="z-30 header">
-            <nav
-                class="bg-white border-gray-200 px-4 lg:px-6 py-2.5 dark:bg-gray-800 border-b border-gray-200 dark:border-gray-700">
+            <nav>
                 <div class="flex flex-wrap justify-between items-center mx-auto max-w-screen-xl">
 
-                    <AlfaMedexLogo class="header__logo w-64 fill-current transition-height duration-500"/>
+                    <AlfaMedexLogo class="header__logo"/>
 
                     <div class="flex items-center lg:order-2">
                         <form id="search-form" class="hidden mr-3 w-full lg:inline-block">
@@ -175,17 +174,37 @@ onMounted(() => {
 </template>
 
 <style lang="postcss">
+.header {
+}
+
+.header nav {
+    @apply bg-white border-b border-gray-200 px-4 lg:px-6 py-5
+    dark:bg-gray-800 dark:border-gray-700
+    transition-[padding] duration-500;
+}
 
 .sticky-header .header {
     @apply sticky top-0;
 }
 
-.sticky-header .header__logo {
-    @apply h-14;
+.sticky-header .header nav {
+    @apply py-2.5;
+}
+
+.header__logo {
+    @apply w-[60px] h-[48px] md:w-64 fill-current relative overflow-hidden md:overflow-auto;
+}
+
+.header__logo > svg {
+    @apply w-64 transition-[width] duration-500
+}
+
+.header__logo > svg > path {
+    @apply hidden md:block;
 }
 
 .with-sidebar > aside {
-    @apply flex w-[20%];
+    @apply lg:flex w-[20%];
 }
 
 .with-sidebar > main,
