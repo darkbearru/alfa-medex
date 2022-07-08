@@ -14,13 +14,16 @@ return new class extends Migration {
     {
         Schema::create('catalogs', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('parent_id')->default(0);//->constrained('catalogs')->cascadeOnDelete();
+            $table->foreignId('parent_id')->default(0)->index('parentIndex');
+            //->constrained('catalogs')->cascadeOnDelete();
             $table->string('token', 50)->index();
             $table->string('name');
             $table->integer('children_count')->default(0);
             $table->longText('description');
             $table->timestamps();
         });
+        // Создаём индекс для parent_id
+        //DB::statement('CREATE INDEX CONCURRENTLY "parentIndex" ON catalogs(parent_id)');
 
         //DB::statement('DROP TRIGGER  catalog_update_insert on catalogs');
         //DB::statement('DROP FUNCTION update_catalog_counters()');
