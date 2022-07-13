@@ -18,3 +18,7 @@ yarn-error.log
 composer.lock
 package-lock.json
 .styleci.yml
+.cache/
+.config/
+.lesshst
+.local/
